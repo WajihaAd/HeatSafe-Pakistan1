@@ -163,10 +163,24 @@ def air_quality():
     r.raise_for_status();return r.json().get('current',{})
 
 def gemini_weather_explanation(question, evidence):
-    try:key=st.secrets.get('GEMINI_API_KEY','')
-    except Exception:key=''
-    if not key:return None
-    text,error=gemini_generate(question,evidence,key)
+    try:
+        key = st.secrets.get("GEMINI_API_KEY", "")
+    except Exception as e:
+        st.error(f"Could not read Streamlit Secrets: {type(e).__name__}")
+        return None
+
+    if not key or not key.strip():
+        st.warning(
+            "GEMINI_API_KEY was not found. "
+            "Check the Secrets settings of this exact Streamlit app."
+        )
+        return None
+
+    text, error = gemini_generate(question, evidence, key.strip())
+
+    if error:
+        st.error(f"Gemini API error: {error}")
+
     return text if text else None
 
 st.markdown("""<div class="hs-topbar"><div class="hs-brand"><span class="hs-orb"></span>☀️ HeatSafe <span>Pakistan</span></div><div class="hs-topmeta">KARACHI · WEATHER INTELLIGENCE · EXPERIMENTAL HEAT-RISK RESEARCH</div></div>""",unsafe_allow_html=True)
