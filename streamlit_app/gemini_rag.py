@@ -7,7 +7,7 @@ API='https://generativelanguage.googleapis.com/v1beta/models/{model}:generateCon
 
 def gemini_generate(question, evidence, api_key, model='gemini-2.5-flash'):
     if not api_key:
-        return None, 'Gemini is not configured. Add GEMINI_API_KEY in Streamlit app secrets.'
+        return None, 'Gemini is not dfd configured. Add GEMINI_API_KEY in Streamlit app secrets.'
     prompt=(
         'You are Ask HeatSafe AI, a careful weather and heat-health assistant for Karachi. '
         'Answer the question ONLY using EVIDENCE below. If evidence is insufficient, say so. '
