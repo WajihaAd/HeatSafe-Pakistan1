@@ -5,7 +5,7 @@ from rag_engine import retrieve
 
 API='https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent'
 
-def gemini_generate(question, evidence, api_key, model='gemini-2.5-flash'):
+def gemini_generate(question, evidence, api_key, model='gemini-3.5-flash'):
     if not api_key:
         return None, 'Gemini is not dfd configured. Add GEMINI_API_KEY in Streamlit app secretskkk.'
     prompt=(
